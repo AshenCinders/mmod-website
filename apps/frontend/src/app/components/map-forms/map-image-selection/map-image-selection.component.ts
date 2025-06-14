@@ -1,4 +1,12 @@
-import { Component, DestroyRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {
   ControlContainer,
   FormControl,
@@ -24,6 +32,7 @@ import {
   BackgroundState,
   LayoutService
 } from '../../../services/layout.service';
+import { TooltipDirective } from '../../../directives/tooltip.directive';
 
 export enum ImageSelectionType {
   THUMBNAIL,
@@ -48,6 +57,7 @@ export enum ImageSelectionType {
     FormsModule,
     ReactiveFormsModule,
     IconComponent,
+    TooltipDirective,
     CdkDropList,
     CdkDrag
   ]
@@ -60,6 +70,9 @@ export class MapImageSelectionComponent implements OnInit {
 
   @ViewChild(MultiFileUploadComponent)
   private uploadComponent: MultiFileUploadComponent;
+
+  @ViewChildren(TooltipDirective)
+  tooltips: QueryList<TooltipDirective>;
 
   protected readonly ImageSelectionType = ImageSelectionType;
   protected readonly max = 5;
